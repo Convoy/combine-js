@@ -63,8 +63,8 @@ class WPCombineJS {
 		// set file path and uri
 
 		$upload_dir = wp_upload_dir();
-		$this->wpcjp_path = $upload_dir['basedir'] . '/wpcjp/';
-		$this->wpcjp_uri = $upload_dir['baseurl'] . '/wpcjp/';
+		$this->wpcjp_path = $upload_dir['basedir'] . '/' . self::nspace . '/';
+		$this->wpcjp_uri = $upload_dir['baseurl'] . '/' . self::nspace . '/';
 
 		// make sure wpcjp directory exists
 
@@ -201,7 +201,7 @@ class WPCombineJS {
 
                 // get name of file based on md5 hash of js handles
 
-                $file_name = 'wpcjp-' . md5( implode( '', array_keys( $this->js_handles_found ) ) );
+                $file_name = self::nspace . '-' . md5( implode( '', array_keys( $this->js_handles_found ) ) );
 
                 // set paths
 
@@ -463,7 +463,7 @@ class WPCombineJS {
         */
         function add_settings_page () {
                 if ( current_user_can( 'manage_options' ) ) {
-                        add_options_page( self::pname, self::pname, 'manage_options', 'wpcjp-settings', array( &$this, 'settings_page' ) );
+                        add_options_page( self::pname, self::pname, 'manage_options', self::nspace . '-settings', array( &$this, 'settings_page' ) );
                 }
         }
 
